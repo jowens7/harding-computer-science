@@ -1,0 +1,101 @@
+JMP main
+
+; Create string phrases
+; string phrase1, phrase2, phrase3, phrase4, phrase5;
+
+phrase1: DC "Enter length of 1st side: "
+                                    DB 0
+phrase2: DC "Enter length of 2nd side: "
+                                    DB 0
+phrase3: DC "Enter length of 3rd side: "
+                                    DB 0
+phrase4: DC "It is a right triangle!"
+                                    DB 0
+phrase5: DC "It is not a right triangle"
+                                    DB 0
+
+; Create int variables
+; int x, y, z, calc1, calc2, calc3;
+
+x:       DS 1         ; Store side 1
+y:       DS 1         ; Store side 2
+z:       DS 1         ; Store side 3
+calc1:   DS 1         ; Store x*y*z
+calc2:   DS 1         ; Store x*x + y*y
+calc3:   DS 1         ; Store z*z
+
+stop:
+    STOP
+
+; Print out phrase4
+isRight:
+    LDA  phrase4        ; cout << phrase4;
+    CALL printString
+    JMP  stop           ; stop();
+
+; Print out phrase5
+isNotRight:
+    LDA  phrase5        ; cout << phrase5;
+    CALL printString
+    JMP  stop           ; stop();
+
+; Check that calc2 - calc3 == 0
+checkIsRight:
+    LD   z             ; calc3 = z*z
+    MUL  z
+    ST   calc3
+    LD   calc2
+    SUB  calc3
+    JE   isRight       ; if (calc2 - calc3 == 0) { isRight(); }
+    JMP  isNotRight    ; else { isNotRight(); }
+
+; Calculate the hypotenuse (calc2)
+calcHyp:
+    LD  x              ; calc2 = (x*x + y*y)
+    MUL x
+    ST  calc2
+    LD  y
+    MUL y
+    ST  calc3
+    LD  calc2
+    ADD calc3
+    ST  calc2
+    JMP checkIsRight   ; checkIsRight();
+
+; Check that clac1 is greater than 0
+greaterThanZero:
+    LD  calc1
+    JG  calcHyp          ; if (calc1 > 0) { calcHyp: }
+    JMP stop             ; else { stop(); }
+
+; Multiply all the sides together
+calcSides:
+    LD  x
+    MUL y                ; calc1 = x*y*z
+    MUL z
+    ST  calc1
+    JMP greaterThanZero  ; greaterThanZero();
+
+; Main function
+main:
+    ; Output phrase 1, input an int into x
+    LDA  phrase1           ; cout << phrase1;
+    CALL printString
+    CALL inputInteger      ; cin >> x;
+    ST   x
+
+
+    ; Output phrase 2, input an int into y
+    LDA  phrase2           ; cout << phrase2;
+    CALL printString
+    CALL inputInteger      ; cin >> y;
+    ST   y
+
+
+    ; Output phrase 3, input an int into z
+    LDA  phrase3           ; cout << phrase3;
+    CALL printString
+    CALL inputInteger      ; cin >> z;
+    ST   z
+
+    JMP  calcSides         ; calcSides();
