@@ -1,0 +1,34 @@
+Problem #1
+
+ADDRESS   CONTENTS
+-------   --------
+000	      16950
+001	      04001
+002	      16950
+003	      04002
+004	      16950
+005	      08001
+006	      08002
+007	      16900
+008	      00000
+
+Problem #2
+Uses address 102 to store the number 6, which is used to determine if we should exit the loop when printing numbers
+
+ADDRESS       CONTENTS
+-------       --------
+000	          12008
+
+001	          01101 
+002	          16900
+003	          06100
+004	          04101
+005	          07102
+006	          14001
+007	          00000
+
+008	          01100
+009	          04101
+010	          12001
+
+102           00006
