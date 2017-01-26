@@ -1,6 +1,6 @@
 Write a TINY program that is equivalent to the following C++ program. Submit your ".tny" source code file using EASEL.
 
-'''
+```
 // isPrime.cpp
 //   This program accepts an integer and determines if it is prime.
 
@@ -29,4 +29,4 @@ void main ()
    else
       cout << “No” << endl;
 }
-'''
+```
