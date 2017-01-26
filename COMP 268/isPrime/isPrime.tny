@@ -1,0 +1,102 @@
+JMP main
+
+strEnterInt: DC "Enter an integer greater than 1: "
+             DB 0
+strYes:      DC "Yes"
+             DB 0
+strNo:       DC "No"
+             DB 0
+
+x:           DS 1
+p:           DS 1
+d:           DS 1
+r:           DS 1
+
+#0:          DB 0
+#1:          DB 1
+#2:          DB 2
+
+stop:
+    STOP
+
+yesIsPrime:
+    ; cout << "No"
+    LDA  strYes
+    CALL printString
+    JMP  stop
+
+noIsPrime:
+    ; cout << "Yes"
+    LDA  strNo
+    CALL printString
+    JMP  stop
+
+isPrime:
+    ; if (p == 1)
+    LD   p
+    SUB  #1
+
+    ; true
+    JE   yesIsPrime
+
+    ; false
+    JMP  noIsPrime
+
+whilePartTwo:
+    ; d++
+    LD   d
+    ADD  #1
+    ST   d
+    JMP whileStart
+
+rEqualsZero:
+    ; p = 0
+    LD   #0
+    ST   p
+    JMP  whilePartTwo
+    
+whilePartOne:
+    ; r = x % d
+    LD   x
+    DIV  d
+    MUL  d
+    SUB  x
+    ST   r
+
+    ; if (r == 0)
+    ; true
+    JE   rEqualsZero
+
+    ; false
+    JMP  whilePartTwo
+
+whileStart:
+    ; while (d <= (x-1)
+    LD   x
+    SUB  #1
+    SUB  d
+
+    ; true
+    JGE  whilePartOne
+
+    ; false
+    JMP  isPrime
+
+main:
+    ; cout << "Enter an int.."
+    LDA  strEnterInt
+    CALL printString
+
+    ; cin >> x
+    CALL inputInteger
+    ST   x
+    
+    ; p = 1
+    LD   #1
+    ST   p
+
+    ; p = 2
+    LD   #2
+    ST   d
+
+    JMP  whileStart
