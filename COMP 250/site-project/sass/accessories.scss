@@ -1,0 +1,42 @@
+.accessories-feature {
+	background-color: #000;
+	background-image: url("..//img/accessories.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	height: calc(40vh - 44px);
+
+	.image-text {
+		position: relative;
+		text-align: center;
+		color: #fff;
+		padding-top: 10vh;
+
+		h1 {
+			z-index: 25;
+			font-size: 50px;
+			font-weight: 100;
+			margin-bottom: 10px;
+		}
+	}
+
+	img {
+		top: calc(70vh - 569px - 100px);
+		z-index: 0;
+	}
+}
+
+.acc-item {
+	margin-top: 30px;
+	text-align: center;
+
+	h2 {
+		font-size: 30px;
+		font-weight: 400;
+		margin-bottom: 15px;
+	}
+
+	img {
+		max-width: 20vw;
+	}
+}

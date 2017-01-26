@@ -1,0 +1,117 @@
+.about-feature {
+	background-color: #000;
+	background-image: url("..//img/colors-blur.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	height: calc(70vh - 44px);
+
+	.image-text {
+		position: relative;
+		text-align: center;
+		color: #fff;
+		padding-top: 15vh;
+
+		h1 {
+			z-index: 25;
+			font-size: 50px;
+			font-weight: 100;
+			margin-bottom: 10px;
+		}
+	}
+
+	img {
+		top: calc(70vh - 569px - 100px);
+		z-index: 0;
+	}
+}
+
+.about-audio {
+	position: relative;
+	z-index: 50;
+	background-color: #000;
+	text-align: center;
+	padding: 80px 0;
+	border-top: solid 1px #000;
+
+	h2 {
+		font-size: 40px;
+		font-weight: 300;
+		color: #fff;
+	}
+
+	img {
+		margin: 40px 0;
+		max-width: 100vw;
+	}
+
+	p {
+		color: #fff;
+	}
+}
+
+.about-display {
+	background-color: #000;
+	text-align: center;
+	padding: 80px 0;
+
+	h2 {
+		font-size: 40px;
+		font-weight: 300;
+		color: #fff;
+	}
+
+	img {
+		margin: 40px 0;
+		max-width: 100vw;
+	}
+
+	p {
+		margin-top: 15px;
+		color: #fff;
+	}
+
+	table {
+		border: none;
+		color: lighten(#000, 80%);
+		background-color: #000;
+
+		thead {
+			color: lighten(#000, 70%);
+			background-color: #000;
+		}
+
+		th {
+			border-left: none;
+		}
+
+		td {
+			border-left: none;
+		}
+	}
+}
+
+.about-purchase {
+	background-color: #fff;
+	text-align: center;
+	padding: 80px 0;
+
+	h2 {
+		font-size: 40px;
+		font-weight: 300;
+	}
+
+	img {
+		margin-top: 40px;
+		max-width: 100vw;
+	}
+
+	.pure-button-primary {
+		position: relative;
+		bottom: 80px;
+	}
+
+	h3 {
+		margin-bottom: 20px;
+	}
+}

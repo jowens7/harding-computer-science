@@ -1,0 +1,14 @@
+.purchase-main {
+  text-align: center; }
+  .purchase-main h1 {
+    margin-top: 30px; }
+  .purchase-main p {
+    margin-bottom: 10px; }
+  .purchase-main ul {
+    text-align: left;
+    display: table;
+    margin: 0 auto; }
+  .purchase-main .model p {
+    margin-bottom: 10px; }
+  .purchase-main table {
+    position: absolute; }

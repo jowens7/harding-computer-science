@@ -1,0 +1,20 @@
+Jackson Buchanan
+6 4 26 17
+Barry Foster
+6 2 34 20
+Josiah Ireland
+3 4 18 11
+Jason Diaz
+2 1 52 15
+Curtis Hunt
+2 0 4 2
+Jeremy Nwonumah
+1 1 11 4
+Aaron Craig
+1 1 9 4
+Jeremy Rector
+0 2 13 4
+Christopher Walker
+0 2 12 4
+Van Cung
+0 2 6 1

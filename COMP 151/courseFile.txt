@@ -1,0 +1,29 @@
+7
+Comp 150 Programming I
+91212
+24
+Ragsdale
+Comp 245 Data Structures
+91213
+40
+Ragsdale
+Comp 268 Architecture and Assemble Language
+91214
+40
+Baber
+Comp 250 Web Development I
+91215
+24
+McCown
+Comp 310 Operating Systems
+91216
+40
+Baird
+Comp 345 Object Oriented Programming
+91217
+40
+Steil
+Comp 336 Database Systems
+91218
+40
+Baird

@@ -1,0 +1,20 @@
+nav {
+	background-color: #1E1E1E;
+	padding: 5px 0;
+
+	.pure-menu-link {
+		color: #fff;
+		transition: color 0.15s ease-in-out;
+		margin: 0 10px;
+		font-family: "Helvetica", sans-serif;
+
+		&:hover, &:focus, &:active {
+			color: #7F7F7F;
+			background-color: transparent;
+		}
+	}
+
+	.pure-menu-selected .pure-menu-link {
+		color: #7F7F7F !important;
+	}
+}
