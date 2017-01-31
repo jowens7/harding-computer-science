@@ -1,3 +1,5 @@
+# isPrime
+
 Write a TINY program that is equivalent to the following C++ program. Submit your ".tny" source code file using EASEL.
 
 ```
