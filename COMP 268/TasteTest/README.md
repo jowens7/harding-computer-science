@@ -1,4 +1,4 @@
-# TasteTest (C++ Version)
+# TasteTest
 
 Write a program that implements the TasteTest algorithm. A flowchart for this algorithm has been provided; your program should model this flowchart exactly.
  
