@@ -1,41 +1,95 @@
-; isAlpha program
+; isAlpha
 ; Jerred Shepherd
-
+; Determines if a given ASCII character is a alphabetical character
 JMP main
 
-uA:
-    DC 'a'
+; Arguments for main
+char:   DS 2
+result: DS 1
+
+; Arguments for the isalpha function
+isalpha_arg: DS 1
+
+; Define numeric constants
+#0: DB 0
+#1: DB 1
+
+; Define character constants
+; l = lowercase
+; u = uppercase
+lA: DC 'a'
     DB 0
-lA:
-    DC 'A'
+uA: DC 'A'
     DB 0
-uZ:
-    DC 'z'
+lZ: DC 'z'
     DB 0
-lZ:
-    DC 'Z'
+uZ: DC 'Z'
     DB 0
 
-inputChar: DS 2
+; return 1 or true
+isalpha_returnTrue:
+    LD #1
+    RET
 
-isalpha_char_addr: DS 11
-isalpha_char:      DS 2
-
-
+; return 0 or false
+isalpha_returnFalse:
+    LD #0
+    RET
 
 ; int isalpha(char c)
 isalpha:
+    ; Get arguments
     LDPARAM 1
-    ST      isalpha_char_addr
-    LDI     isalpha_char_addr
-    ST      isalpha_char
+    ST isalpha_arg
+    ; Figure out if the character is lower or upper case
+    ; if (c - a <= 0)
+    LD la
+    SUB isalpha_arg
+    JLE isalpha_isLower
+    ; else
+    JMP isalpha_isUpper
+
+isalpha_isUpper:
+    ; Check lower limit for uppercase chars
+    ; if (c - A >= 0)
+    LD  isalpha_arg
+    SUB uA
+    JGE isalpha_isUpper_partTwo
+    ; else
+    JMP isalpha_returnFalse
+
+isalpha_isUpper_partTwo:
+    ; Check upper limit for uppercase chars
+    ; if (c - Z <= 0)
+    LD isalpha_arg
+    SUB uZ
+    JLE isalpha_returnTrue
+    ; else
+    JMP isalpha_returnFalse
+    
+isalpha_isLower:
+    ; Check lower limit for lowercase chars
+    ; if (c - a >= 0)
+    LD  isalpha_arg
+    SUB lA
+    JGE isalpha_isLower_partTwo
+    ; else
+    JMP isalpha_returnFalse
+
+isalpha_isLower_partTwo:
+    ; Check upper limit for lowercase chars
+    ; if (c - z >= 0)
+    LD isalpha_arg
+    SUB lZ
+    JLE isalpha_returnTrue
+    ; else
+    JMP isalpha_returnFalse
 
 main:
-    CALL inputString
-    ST   inputChar
-    LDA  inputChar
-    PUSH
-    CALL isalpha
-    CALL printInteger
-    POP
-    STOP
+   LDA  char
+   CALL inputString
+   PUSH char
+   CALL isalpha
+   CALL printInteger
+   POP  result
+   STOP
