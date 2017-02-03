@@ -1,154 +1,76 @@
+; isAlpha
 ; Jerred Shepherd
-; tasteTest (TINY)
-; 2/1/2017
-; COMP 268
-; Dr. Baber
-
 JMP main
 
-; Create strings
-strPreference: DC "Preference? "
-               DB 0
-strPepsiWins:  DC "Pepsi Wins"
-               DB 0
-strCokeWins:   DC "Coke Wins"
-               DB 0
-strTie:        DC "TIE!"
-               DB 0
+; Arguments for main
+char:   DS 2
+result: DS 1
 
-; Variable to store char input
-input:      DS 2
-; Variables to store votes
-cokeVotes:  DS 1
-pepsiVotes: DS 1
+; Arguments for the isalpha function
+isalpha_arg: DS 1
 
-; Create lowercase and uppercase characters
-; U = uppercase
-; L = lowercase
-charUC:
-        DC 'C'
-        DB 0
-charLC:
-        DC 'c'
-        DB 0
-charUP:
-        DC 'P'
-        DB 0
-charLP:
-        DC 'p'
-        DB 0
-charUQ:
-        DC 'Q'
-        DB 0
-charLQ:
-        DC 'q'
-        DB 0
-
-; Constant integers
+; Define constants
 #0: DB 0
 #1: DB 1
 
-; End of the program
-stop:
-    STOP
+; Store character constants
+; l = lowercase
+; u = uppercase
+lA: DC 'a'
+    DB 0
+uA: DC 'A'
+    DB 0
+lZ: DC 'z'
+    DB 0
+uZ: DC 'Z'
+    DB 0
 
-noWinner:
-    ; cout << "TIE!";
-    LDA  strTie
-    CALL printString
-    JMP stop
+isalpha_returnTrue:
+    LD #1
+    RET
 
-cokeWinner:
-    ; cout << "Coke Wins";
-    LDA  strCokeWins
-    CALL printString
-    JMP stop
+isalpha_returnFalse:
+    LD #0
+    RET
 
-pepsiWinner:
-    ; cout << "Pepsi Wins";
-    LDA  strPepsiWins
-    CALL printString
-    JMP stop
+; int isalpha(char c)
+isalpha:
+    LDPARAM 1
+    ST isalpha_arg
+    LD la
+    SUB isalpha_arg
+    JLE isalpha_isLower
+    JMP isalpha_isUpper
 
-findWinner:
-    LD  pepsiVotes
-    SUB cokeVotes
-    JG  pepsiWinner
-    JL  cokeWinner
-    JMP noWinner
+isalpha_isUpper:
+    LD  isalpha_arg
+    SUB uA
+    JGE isalpha_isUpper_partTwo
+    JMP isalpha_returnFalse
 
-ifQuitLogic:
-    JMP findWinner
+isalpha_isUpper_partTwo:
+    LD isalpha_arg
+    SUB uZ
+    JLE isalpha_returnTrue
+    JMP isalpha_returnFalse
+    
+isalpha_isLower:
+    LD  isalpha_arg
+    SUB lA
+    JGE isalpha_isLower_partTwo
+    JMP isalpha_returnFalse
 
-ifQuitStart:
-    ; if (input == 'q' || input == 'Q')
-    LD  charLQ
-    SUB input
-    JE  ifQuitLogic
-
-    LD  charUQ
-    SUB input
-    JE  ifQuitLogic
-
-    ; input != q, let's check coke
-    JMP ifCokeStart
-
-
-ifCokeLogic:
-    LD  cokeVotes
-    ADD #1
-    ST  cokeVotes
-    JMP mainLoopStart
-   
-ifCokeStart:
-    ; if (input == 'c' || input == 'C')
-    LD  charLC
-    SUB input
-    JE  ifCokeLogic
-
-    LD  charUC
-    SUB input
-    JE  ifCokeLogic
-
-    ; input != c, let's check pepsi
-    JMP ifPepsiStart
-
-
-ifPepsiLogic:
-    LD  pepsiVotes
-    ADD #1
-    ST  pepsiVotes
-    JMP mainLoopStart
-
-ifPepsiStart:
-    ; if (input == 'p' || input == 'P')
-    LD  charLP
-    SUB input
-    JE  ifPepsiLogic
-
-    LD  charUP
-    SUB input
-    JE  ifPepsiLogic
-
-    ; input != p, let's start the loop again
-    JMP mainLoopStart
-
-
-; This is the while loop to accept input
-mainLoopStart:
-    ; cout << "Preference? ";
-    LDA  strPreference
-    CALL printString
-
-    ; cin >> input;
-    LDA  input
-    CALL inputString
-
-    JMP  ifQuitStart
+isalpha_isLower_partTwo:
+    LD isalpha_arg
+    SUB lZ
+    JLE isalpha_returnTrue
+    JMP isalpha_returnFalse
 
 main:
-    ; int cokeVotes, pepsiVotes = 0;
-    LD  #0
-    ST  cokeVotes
-    ST  pepsiVotes
-    JMP mainLoopStart
+   LDA  char
+   CALL inputString
+   PUSH char
+   CALL isalpha
+   CALL printInteger
+   POP  result
+   STOP
