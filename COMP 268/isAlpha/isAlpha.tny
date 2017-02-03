@@ -1,0 +1,41 @@
+; isAlpha program
+; Jerred Shepherd
+
+JMP main
+
+uA:
+    DC 'a'
+    DB 0
+lA:
+    DC 'A'
+    DB 0
+uZ:
+    DC 'z'
+    DB 0
+lZ:
+    DC 'Z'
+    DB 0
+
+inputChar: DS 2
+
+isalpha_char_addr: DS 11
+isalpha_char:      DS 2
+
+
+
+; int isalpha(char c)
+isalpha:
+    LDPARAM 1
+    ST      isalpha_char_addr
+    LDI     isalpha_char_addr
+    ST      isalpha_char
+
+main:
+    CALL inputString
+    ST   inputChar
+    LDA  inputChar
+    PUSH
+    CALL isalpha
+    CALL printInteger
+    POP
+    STOP
