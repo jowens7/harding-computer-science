@@ -10,108 +10,108 @@ string2: DS 10
 ; Function variables
 ; Contains the current working index
 ; And the different between the numbers
-strcomp_index: DS 1
-strcomp_diff:  DS 1
+strcmp_index: DS 1
+strcmp_diff:  DS 1
 
 ; Function arguments
 ; These store the address of the first
 ; char in the string
-strcomp_string1_addr: DS 1
-strcomp_string2_addr: DS 1
+strcmp_string1_addr: DS 1
+strcmp_string2_addr: DS 1
 
 ; These store the value of a single
 ; character at a given 
-strcomp_string1_index_value: DS 1
-strcomp_string2_index_value: DS 1
+strcmp_string1_index_value: DS 1
+strcmp_string2_index_value: DS 1
 
 ; Integer constants
 #0:    DB 0
 #1:    DB 1
 #null: DC '\n'
 
-strcomp_return:
+strcmp_return:
     ; Return value in accumulator
-    PUSH strcomp_diff
+    PUSH strcmp_diff
     RET
 
-strcomp_loop_end:
+strcmp_loop_end:
     ; Return to start of loop
-    JMP 1strcomp_loop_logic_1
+    JMP 1strcmp_loop_logic_1
 
-strcomp_increment_index:
+strcmp_increment_index:
     ; index = index + 1
-    LD  strcomp_index
+    LD  strcmp_index
     ADD #1
-    ST  strcomp_index
-    JMP strcomp_loop_end
+    ST  strcmp_index
+    JMP strcmp_loop_end
 
-strcomp_compare_values:
+strcmp_compare_values:
     ; diff = string1char - string2char
-    LD   strcomp_string1_index_value
-    SUB  strcomp_string2_index_value
-    ST   strcomp_diff
-    JMP  strcomp_increment_index
+    LD   strcmp_string1_index_value
+    SUB  strcmp_string2_index_value
+    ST   strcmp_diff
+    JMP  strcmp_increment_index
 
 ; Check if string2 is null
-strcomp_check_null_string2:
+strcmp_check_null_string2:
     ; if (string2char = "\n")
-    LD  strcomp_string2_index_value
+    LD  strcmp_string2_index_value
     LD  #null
-    JE  strcomp_return
+    JE  strcmp_return
     ; else
-    JMP strcomp_compare_values
+    JMP strcmp_compare_values
 
 ; Check if string1 is null
-strcomp_check_null_string1:
+strcmp_check_null_string1:
     ; if (string1char = "\n")
-    LD  strcomp_string1_index_value
+    LD  strcmp_string1_index_value
     LD  #null
-    JE  strcomp_check_null_string2
+    JE  strcmp_check_null_string2
     ; else
-    JMP strcomp_compare_values
+    JMP strcmp_compare_values
 
 ; Logic of the loop after getting index
 ; values
-strcomp_loop_logic_2:
-    JMP strcomp_check_null_string1
+strcmp_loop_logic_2:
+    JMP strcmp_check_null_string1
 
 ; Get the ASCII value from string2
-strcomp_check_string2:
+strcmp_check_string2:
     ; string2char = &string2 + index
-    LD  strcomp_string1_addr
-    ADD strcomp_index
-    ST strcomp_string1_index_value
-    JMP strcomp_loop_logic_2
+    LD  strcmp_string1_addr
+    ADD strcmp_index
+    ST strcmp_string1_index_value
+    JMP strcmp_loop_logic_2
 
 ; Get the ASCII value from string1
-strcomp_check_string1:
+strcmp_check_string1:
     ; string1char = &string1 + index
-    LD  strcomp_string1_addr
-    ADD strcomp_index
-    ST strcomp_string1_index_value
+    LD  strcmp_string1_addr
+    ADD strcmp_index
+    ST strcmp_string1_index_value
 
 ; Start of the loop
-1strcomp_loop_logic_1:
-    JMP strcomp_check_string1
+1strcmp_loop_logic_1:
+    JMP strcmp_check_string1
 
 ; int strcmp (char string1[], char string2[])
-strcomp:
+strcmp:
     ; int diff, index = 0
     LD      #0
-    ST      strcomp_diff
-    ST      strcomp_index
+    ST      strcmp_diff
+    ST      strcmp_index
     ; Get arguments
     LDPARAM 1
-    ST      strcomp_string1_addr
-    LDI     strcomp_string1_addr
+    ST      strcmp_string1_addr
+    LDI     strcmp_string1_addr
     LDPARAM 2
-    ST      strcomp_string2_addr
-    LDI     strcomp_string1_addr
+    ST      strcmp_string2_addr
+    LDI     strcmp_string1_addr
     ; Start loop
-    JMP     1strcomp_loop_logic_1
+    JMP     1strcmp_loop_logic_1
     
 ; Main function
-; Input two strings, call strcomp
+; Input two strings, call strcmp
 ; Then output the result
 main:
     LDA  string1
@@ -120,7 +120,7 @@ main:
     CALL inputString
     PUSH string1
     PUSH string2
-    CALL strcomp
+    CALL strcmp
     POP
     CALL printInteger
     POP
