@@ -27,4 +27,12 @@ WHERE au_id IN (SELECT au_id
                                    WHERE stor_id = '8042')) GROUP BY au_id;
 
 #4 
+
 #5 
+SELECT
+  publishers.pub_name,
+  COUNT(employee.pub_id)
+FROM publishers
+  INNER JOIN employee ON publishers.pub_id = employee.pub_id
+GROUP BY publishers.pub_id, pub_name
+ORDER BY COUNT(employee.pub_id) DESC;
