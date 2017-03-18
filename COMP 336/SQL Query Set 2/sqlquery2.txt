@@ -1,0 +1,5 @@
+#1 SELECT * FROM titleauthor WHERE title_id = (SELECT TOP 1 title_id FROM titles ORDER BY ytd_sales DESC);
+#2 
+#3 
+#4 
+#5 
