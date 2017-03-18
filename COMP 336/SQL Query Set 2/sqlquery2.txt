@@ -1,5 +1,30 @@
-#1 SELECT * FROM titleauthor WHERE title_id = (SELECT TOP 1 title_id FROM titles ORDER BY ytd_sales DESC);
-#2 SELECT SUM(advance) FROM titles WHERE title_id IN (SELECT title_id FROM titleauthor WHERE au_id IN (SELECT au_id FROM titleauthor WHERE title_id = 'PS2091'));
+#1
+SELECT *
+FROM titleauthor
+WHERE title_id = (SELECT TOP 1 title_id
+                  FROM titles
+                  ORDER BY ytd_sales DESC);
+
+#2
+SELECT SUM(advance)
+FROM titles
+WHERE title_id IN (SELECT title_id
+                   FROM titleauthor
+                   WHERE au_id IN (SELECT au_id
+                                   FROM titleauthor
+                                   WHERE title_id = 'PS2091'));
+
 #3 
+SELECT
+  au_id,
+  SUM(qty)
+FROM sales
+  INNER JOIN titleauthor ON sales.title_id = titleauthor.title_id
+WHERE au_id IN (SELECT au_id
+                FROM titleauthor
+                WHERE title_id IN (SELECT sales.title_id
+                                   FROM sales
+                                   WHERE stor_id = '8042')) GROUP BY au_id;
+
 #4 
 #5 
