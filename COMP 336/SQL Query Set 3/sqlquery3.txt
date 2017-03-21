@@ -1,5 +1,14 @@
 #1
+SELECT
+  au_fname,
+  au_lname,
+  COUNT(titleauthor.au_id)
+FROM titleauthor
+  RIGHT JOIN authors ON titleauthor.au_id = authors.au_id
+GROUP BY au_fname, au_lname
+ORDER BY au_fname ASC, au_lname ASC;
 #2
+
 #3
 #4
 #5
