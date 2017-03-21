@@ -34,4 +34,12 @@ ORDER BY au_fname ASC,
   au_lname ASC,
   state ASC
 #4
+SELECT
+  title,
+  titles.price
+FROM titles
+  JOIN (SELECT price
+        FROM titles
+        GROUP BY price
+        HAVING COUNT(*) > 1) prices ON titles.price = prices.price
 #5
