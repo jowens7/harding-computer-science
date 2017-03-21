@@ -20,9 +20,11 @@ price. List these in order by the price, from smallest to largest.
 5. Find the title of any book that has sold copies in every store.
 
 Note: write your query so that
+
 (a) no work is done prior to the query. i.e. Don’t look up the authors of PC8888 and then run a
 query based on the author id. Look up the authors as part of the query.
 and
+
 (b) no work is done after the query. i.e. Don’t list all the numbers and expect the reader to add
 them up or find the max, etc.
 Turn in your MS-Word document, named sqlquery3.docx, using Easel.
