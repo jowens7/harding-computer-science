@@ -20,5 +20,18 @@ GROUP BY authors.au_id, stores.state
 HAVING SUM(qty) > 30
 ORDER BY stores.state, state_qty;
 #3
+SELECT
+  au_fname,
+  au_lname,
+  state,
+  SUM(QTY) as state_qty
+FROM authors
+  INNER JOIN titleauthor ON authors.au_id = titleauthor.au_id
+  INNER JOIN sales ON titleauthor.title_id = sales.title_id
+WHERE au_lname LIKE 'Green%'
+GROUP BY au_fname, au_lname, state
+ORDER BY au_fname ASC,
+  au_lname ASC,
+  state ASC
 #4
 #5
