@@ -43,3 +43,15 @@ FROM titles
         GROUP BY price
         HAVING COUNT(*) > 1) prices ON titles.price = prices.price
 #5
+SELECT title
+FROM titles
+WHERE NOT EXISTS(
+    SELECT stor_id
+    FROM stores
+    WHERE NOT EXISTS(
+        SELECT stor_id
+        FROM sales
+        WHERE stores.stor_id = sales.stor_id
+              AND titles.title_id = sales.title_id
+    )
+)
