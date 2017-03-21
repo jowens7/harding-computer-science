@@ -8,7 +8,17 @@ FROM titleauthor
 GROUP BY au_fname, au_lname
 ORDER BY au_fname ASC, au_lname ASC;
 #2
-
+SELECT
+  stores.state,
+  SUM(qty) AS state_qty,
+  authors.au_id
+FROM authors
+  INNER JOIN titleauthor ON authors.au_id = titleauthor.au_id
+  INNER JOIN sales ON titleauthor.title_id = sales.title_id
+  INNER JOIN stores ON sales.stor_id = stores.stor_id
+GROUP BY authors.au_id, stores.state
+HAVING SUM(qty) > 30
+ORDER BY stores.state, state_qty;
 #3
 #4
 #5
