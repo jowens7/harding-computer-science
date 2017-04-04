@@ -7,6 +7,7 @@ FROM titleauthor
   RIGHT JOIN authors ON titleauthor.au_id = authors.au_id
 GROUP BY au_fname, au_lname
 ORDER BY au_fname ASC, au_lname ASC;
+
 #2
 SELECT
   stores.state,
@@ -19,6 +20,7 @@ FROM authors
 GROUP BY authors.au_id, stores.state
 HAVING SUM(qty) > 30
 ORDER BY stores.state, state_qty;
+
 #3
 SELECT
   au_fname,
@@ -33,6 +35,7 @@ GROUP BY au_fname, au_lname, state
 ORDER BY au_fname ASC,
   au_lname ASC,
   state ASC
+  
 #4
 SELECT
   title,
