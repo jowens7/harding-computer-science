@@ -6,7 +6,9 @@ using namespace std;
 #define MAXIMUM 1000000
 int Factors[MAXIMUM];
 
-int properFactors(int n, int factors[], int& NumFactors) {
+extern "C" int properFactors(int, int[], int&);
+
+int properFactorsCpp(int n, int factors[], int& NumFactors) {
 	int k = 2;
 	int sum = 1;
 	factors[0] = 1;
@@ -33,7 +35,7 @@ int properFactors(int n, int factors[], int& NumFactors) {
 	return sum;
 }
 
-int main() {
+void runTimings() {
 	int q;
 	int numFactors;
 	int PairCount = 0;
@@ -56,6 +58,9 @@ int main() {
 	double TotalTime = (double)(clock() - StartClock) / CLOCKS_PER_SEC;
 	cout << "Number of amicable pairs found = " << PairCount << endl;
 	cout << "Time = " << TotalTime << " chrono::seconds" << endl;
+}
 
+int main() {
+	runTimings();
 	system("pause");
 }
