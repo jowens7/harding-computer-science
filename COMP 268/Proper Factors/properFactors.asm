@@ -1,3 +1,7 @@
+; Jerred Shepherd
+; 4-3-2017
+; Proper Factors (MASM version)
+
 .386
 .MODEL FLAT, C
 
@@ -8,9 +12,10 @@ i       dd ?
 factor2 dd ?
 
 .CODE
+; int properFactors(int n, int factors[], int& NumFactors)
 properFactors PROC USES ebx ecx edx edi esi, n:dword, factors:ptr, NumFactors:ptr
 
-; Move the factors list to ESI
+; Move the factors array to ESI
 MOV esi, factors
 MOV [esi], 1
 
